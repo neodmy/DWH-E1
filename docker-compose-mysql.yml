@@ -1,0 +1,9 @@
+version: "3.5"
+services:
+  mysql:
+    image: budougumi0617/mysql-sakila
+    container_name: mysql-dwh-e1
+    environment: 
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - "43306:3306"
