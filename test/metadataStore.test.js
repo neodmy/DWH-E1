@@ -216,6 +216,11 @@ describe('Database', () => {
 			const results = store.metadata.dropAllTablesQueries();
 			expect(results.length).eq(19);
 		});
+
+		it('should return an array of drop table queries for every table', () => {
+			const results = store.metadata.dropAllTablesQueries();
+			expect(results.length).eq(19);
+		});
 	});
 
 	describe('create table queries', () => {
@@ -343,7 +348,7 @@ describe('Database', () => {
 		});
 	});
 
-	describe.only('insert into table queries', () => {
+	describe('insert into table queries', () => {
 		it('should generate drop query for VIEWS table', async () => {
 			const result = await store.metadata.VIEWS.insert();
 			expect(result.before).includes('INSERT INTO VIEWS_BEFORE');
