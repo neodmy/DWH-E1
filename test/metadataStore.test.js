@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const { expect } = require('chai');
 const system = require('../system');
 
@@ -109,9 +110,14 @@ describe('Database', () => {
 			const result = await store.metadata.INNODB_TABLESTATS.select();
 			expect(result.length).not.eq(0);
 		});
+
+		it('should execute select queries for every table', async () => {
+			const results = await store.metadata.selectAllTablesQueries();
+			expect(results.length).eq(19);
+		});
 	});
 
-	describe('drop tables queries', () => {
+	describe('drop table queries', () => {
 		it('should generate drop query for VIEWS table', () => {
 			const result = store.metadata.VIEWS.drop();
 			expect(result).eq(`DROP TABLE IF EXISTS VIEWS_${ojectiveDb}_BEFORE, VIEWS_${ojectiveDb}_AFTER`);
@@ -206,9 +212,14 @@ describe('Database', () => {
 			const result = store.metadata.INNODB_TABLESTATS.drop();
 			expect(result).eq(`DROP TABLE IF EXISTS INNODB_TABLESTATS_${ojectiveDb}_BEFORE, INNODB_TABLESTATS_${ojectiveDb}_AFTER`);
 		});
+
+		it('should return an array of drop table queries for every table', () => {
+			const results = store.metadata.dropAllTablesQueries();
+			expect(results.length).eq(19);
+		});
 	});
 
-	describe('create tables queries', () => {
+	describe('create table queries', () => {
 		it('should generate create tables queries for VIEWS table', async () => {
 			const result = await store.metadata.VIEWS.create();
 			expect(result.createTableBefore).includes(`VIEWS_${ojectiveDb}_BEFORE`);
@@ -321,6 +332,15 @@ describe('Database', () => {
 			const result = await store.metadata.INNODB_TABLESTATS.create();
 			expect(result.createTableBefore).includes(`INNODB_TABLESTATS_${ojectiveDb}_BEFORE`);
 			expect(result.createTableAfter).includes(`INNODB_TABLESTATS_${ojectiveDb}_AFTER`);
+		});
+
+		it('should return an array of create table queries for every table', async () => {
+			const results = await store.metadata.createAllTablesQueries();
+			expect(results.length).eq(19);
+			results.forEach(result => {
+				expect(result.createTableBefore).to.exist;
+				expect(result.createTableAfter).to.exist;
+			});
 		});
 	});
 });
