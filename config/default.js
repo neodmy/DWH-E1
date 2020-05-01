@@ -10,11 +10,18 @@ module.exports = {
 		port: 43306,
 		metadataSchema: 'information_schema',
 		mysqlSchema: 'mysql',
-		sakilaSchema: 'sakila',
+		objectiveDb: process.env.DB_NAME || 'sakila',
+		registerSchema: 'register',
 	},
 	store: {
-		metadataStore: {
-			schema: 'INFORMATION_SCHEMA',
+		metadata: {
+			objectiveDb: process.env.DB_NAME || 'sakila',
+		},
+		register: {
+			dbName: 'register',
+		},
+		objective: {
+			dbName: process.env.DB_NAME || 'sakila',
 		},
 	},
 	routes: {

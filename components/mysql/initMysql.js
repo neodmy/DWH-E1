@@ -20,18 +20,25 @@ module.exports = () => {
 			database: config.mysqlSchema,
 		});
 
-		const sakilaSchema = await mysql.createConnection({
+		const objectiveSchema = await mysql.createConnection({
 			host: config.host,
 			user: config.user,
 			password: config.password,
 			port: config.port,
-			database: config.sakilaSchema,
+		});
+
+		const registerSchema = await mysql.createConnection({
+			host: config.host,
+			user: config.user,
+			password: config.password,
+			port: config.port,
 		});
 
 		return {
 			informationSchema,
 			mysqlSchema,
-			sakilaSchema,
+			objectiveSchema,
+			registerSchema,
 		};
 	};
 
