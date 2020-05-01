@@ -3,13 +3,14 @@ services:
   dwh-e1:
     build:
       context: .
-    container_name: dwh-e1
+    container_name: dwh-e1-app
     ports:
       - "4000:4000"
   mysql:
     image: budougumi0617/mysql-sakila
-    container_name: mysql-dwh-e1
+    container_name: mysql-dwh-e1-app
     environment: 
       MYSQL_ROOT_PASSWORD: 'root'
+      DB_NAME: 'sakila'
     ports:
       - "43306:3306"
