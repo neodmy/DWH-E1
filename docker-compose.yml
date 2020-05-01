@@ -3,7 +3,7 @@ services:
   dwh-e1:
     build:
       context: .
-    container_name: dwh-e1
+    container_name: dwh-e1-app
     ports:
       - "4000:4000"
   mysql:
