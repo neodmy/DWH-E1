@@ -50,6 +50,9 @@ module.exports = {
 				},
 			},
 		},
+		api: {
+			dbName: objectiveDb,
+		},
 	},
 	logger: {
 		transport: 'console',
