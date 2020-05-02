@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-expressions */
-const { expect } = require('chai');
 const system = require('../system');
 
 describe('Database', () => {
