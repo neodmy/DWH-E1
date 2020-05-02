@@ -1,12 +1,11 @@
 /* eslint-disable no-unused-expressions */
 const system = require('../system');
 
-describe('Database', () => {
+describe('Register store', () => {
 	const sys = system();
 	let store;
 
 	before(async () => {
-		sys.remove('controller');
 		({ store } = await sys.start());
 		const dropQueries = await store.metadata.dropAllTablesQueries();
 		const createQueries = await store.metadata.createAllTablesQueries();

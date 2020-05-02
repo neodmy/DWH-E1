@@ -2,12 +2,11 @@
 const { expect } = require('chai');
 const system = require('../system');
 
-describe('Database', () => {
+describe('Metadata store', () => {
 	const sys = system();
 	let store;
 
 	before(async () => {
-		sys.remove('controller');
 		({ store } = await sys.start());
 	});
 
