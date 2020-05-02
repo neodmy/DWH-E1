@@ -8,8 +8,7 @@ describe('Database', () => {
 
 	before(async () => {
 		sys.remove('controller');
-		({ store, config } = await sys.start());
-		ojectiveDb = config.store.objective.dbName;
+		({ store } = await sys.start());
 	});
 
 
