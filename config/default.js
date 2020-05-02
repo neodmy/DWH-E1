@@ -1,3 +1,4 @@
+const objectiveDb = process.env.DB_NAME || 'sakila';
 module.exports = {
 	server: {
 		host: '0.0.0.0',
@@ -7,22 +8,22 @@ module.exports = {
 		host: 'localhost',
 		user: 'root',
 		password: 'root',
-		port: 43306,
+		port: process.env.MYSQL_PORT || 43306,
 		metadataSchema: 'information_schema',
 		mysqlSchema: 'mysql',
-		objectiveDb: process.env.DB_NAME || 'sakila',
+		objectiveDb,
 		registerSchema: 'register',
 	},
 	store: {
 		metadata: {
-			objectiveDb: process.env.DB_NAME || 'sakila',
+			objectiveDb,
 			registerStorageEngine: process.env.STORAGE_ENGINE || 'MYISAM',
 		},
 		register: {
 			dbName: 'register',
 		},
 		objective: {
-			dbName: process.env.DB_NAME || 'sakila',
+			dbName: objectiveDb,
 		},
 	},
 	routes: {
