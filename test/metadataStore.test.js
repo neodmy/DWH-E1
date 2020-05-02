@@ -7,6 +7,14 @@ describe('Metadata store', () => {
 	let store;
 
 	before(async () => {
+		sys.remove('middleware.default');
+		sys.remove('middleware.prepper');
+		sys.remove('app');
+		sys.remove('routes');
+		sys.remove('routes.admin');
+		sys.remove('routes.api');
+		sys.remove('server');
+		sys.remove('controller');
 		({ store } = await sys.start());
 	});
 
