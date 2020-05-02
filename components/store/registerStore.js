@@ -1,5 +1,6 @@
 module.exports = () => {
 	const start = async ({ config, logger, mysql }) => {
+		logger.info('Starting registerStore component');
 		const { registerSchema } = mysql;
 		const { dbName } = config;
 
@@ -7,7 +8,6 @@ module.exports = () => {
 			logger.info('register store | Initiating register schema');
 			const createQuery = `CREATE DATABASE IF NOT EXISTS ${dbName}`;
 			const useQuery = `USE ${dbName}`;
-			logger.info('register store | initiating');
 			await registerSchema.query(createQuery);
 			await registerSchema.query(useQuery);
 		};
