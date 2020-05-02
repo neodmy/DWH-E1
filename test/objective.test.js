@@ -12,7 +12,7 @@ describe('Objective store', () => {
 	after(() => sys.stop());
 
 	describe('Execute query', () => {
-		it('should execute a query without errors', async () => {
+		it.skip('should execute a query without errors', async () => {
 			const query = 'CREATE TABLE IF NOT EXISTS pet (name VARCHAR(20), owner VARCHAR(20))';
 			const query2 = 'INSERT INTO pet (name, owner) VALUES (\'dayus\',\'rocky\')';
 			const query3 = 'SELECT * FROM pet';
