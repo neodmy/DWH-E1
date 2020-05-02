@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-expressions */
-const { expect } = require('chai');
 const system = require('../system');
 
 describe('Database', () => {
@@ -8,8 +7,7 @@ describe('Database', () => {
 
 	before(async () => {
 		sys.remove('controller');
-		({ store, config, mysql } = await sys.start());
-		ojectiveDb = config.store.objective.dbName;
+		({ store } = await sys.start());
 		const dropQueries = await store.metadata.dropAllTablesQueries();
 		const createQueries = await store.metadata.createAllTablesQueries();
 		await store.register.initStore();
