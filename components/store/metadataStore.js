@@ -3,7 +3,7 @@ module.exports = () => {
 		logger.info('Starting metadataStore component');
 		const { informationSchema } = mysql;
 
-		const { objectiveDb } = config;
+		const { objectiveDb, registerStorageEngine } = config;
 
 		const formatRows = rows => rows.map(row => ({ ...row }));
 
@@ -23,8 +23,8 @@ module.exports = () => {
 			}
 			query += `${columns[i].Field} ${columns[i].Type}`;
 
-			const before = `CREATE TABLE IF NOT EXISTS ${tableName}_BEFORE (${query})`;
-			const after = `CREATE TABLE IF NOT EXISTS ${tableName}_AFTER (${query})`;
+			const before = `CREATE TABLE IF NOT EXISTS ${tableName}_BEFORE (${query}) ENGINE = ${registerStorageEngine}`;
+			const after = `CREATE TABLE IF NOT EXISTS ${tableName}_AFTER (${query}) ENGINE = ${registerStorageEngine}`;
 			return { before, after };
 		};
 
@@ -39,8 +39,8 @@ module.exports = () => {
 			}
 			query += `${columns[i].Field}`;
 
-			const before = `INSERT INTO ${tableName}_BEFORE (${query}) VALUES `;
-			const after = `INSERT INTO ${tableName}_AFTER (${query}) VALUES `;
+			const before = `INSERT INTO ${tableName}_BEFORE (${query}) VALUES ?`;
+			const after = `INSERT INTO ${tableName}_AFTER (${query}) VALUES ?`;
 			return { before, after };
 		};
 
@@ -49,8 +49,8 @@ module.exports = () => {
 		const selectTableData = async (tableName, filter) => {
 			let query = `SELECT * FROM ${tableName}`;
 			if (filter) query += ` ${filter}`;
-			const result = await executeQuery(query);
-			return result;
+			const [rows] = await informationSchema.execute(query);
+			return rows.map(row => Object.values(row));
 		};
 
 		const informationSchemaTables = {
@@ -114,12 +114,12 @@ module.exports = () => {
 				insert: () => insertTablesQueries('PARAMETERS'),
 				create: () => createTablesQuery('PARAMETERS'),
 			},
-			KEY_COLUMN_USAGE: {
+			/*KEY_COLUMN_USAGE: {
 				select: () => selectTableData('KEY_COLUMN_USAGE', `WHERE CONSTRAINT_SCHEMA='${objectiveDb}'`),
 				drop: () => dropTablesQueries('KEY_COLUMN_USAGE'),
 				insert: () => insertTablesQueries('KEY_COLUMN_USAGE'),
 				create: () => createTablesQuery('KEY_COLUMN_USAGE'),
-			},
+			},*/
 			INNODB_COLUMNS: {
 				select: () => selectTableData('INNODB_COLUMNS'),
 				drop: () => dropTablesQueries('INNODB_COLUMNS'),
@@ -176,11 +176,14 @@ module.exports = () => {
 
 		const dropAllTablesQueries = () => Object.keys(informationSchemaTables).map(key => informationSchemaTables[key].drop());
 
+		const insertAllTablesQueries = () => Promise.all(Object.keys(informationSchemaTables).map(key => informationSchemaTables[key].insert()));
+
 		return {
-			...informationSchemaTables,
+			informationSchemaTables,
 			selectAllTables,
 			createAllTablesQueries,
 			dropAllTablesQueries,
+			insertAllTablesQueries,
 		};
 	};
 
