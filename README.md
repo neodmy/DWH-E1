@@ -58,9 +58,11 @@ $ npm start
 App will be listening on port `4000`
 
 ---
+
 ### Dev environment
 
-##### Run containers
+##### Run containers
+
 ```cmd
 $ npm run docker-app
 ```
