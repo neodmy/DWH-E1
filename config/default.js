@@ -16,6 +16,7 @@ module.exports = {
 	store: {
 		metadata: {
 			objectiveDb: process.env.DB_NAME || 'sakila',
+			registerStorageEngine: process.env.STORAGE_ENGINE || 'MYISAM',
 		},
 		register: {
 			dbName: 'register',
