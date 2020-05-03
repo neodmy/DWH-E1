@@ -3,10 +3,11 @@
 This app has been developed for the [ETSI Informáticos](https://fi.upm.es/) 2019/2020 **Data Warehouse** course during the **assignment E1** held by [Universidad Politécnica de Madrid](https://www.upm.es/) as a part of the Computer Science Degree.
 
 ## Table of contents
-- [App description](Appdescription)
-- [Running on local environment](Localenvironment)
-- [Running on dev environment](Devenvironment)
-- [Making queries](Makingqueries)
+
+- [App description](#app-description)
+- [Running on local environment](#local-environment)
+- [Running on dev environment](#dev-environment)
+- [Making queries](#making-queries)
 
 ---
 
