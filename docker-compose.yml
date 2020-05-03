@@ -1,16 +1,24 @@
 version: "3.5"
 services:
+
   dwh-e1:
     build:
-      context: .
+      dockerfile: ./Dockerfile
+      context: ./
     container_name: dwh-e1-app
+    environment: 
+      DB_CONTAINER: mysql-dwh-e1-app
+      DB_NAME: 'sakila'
+      MYSQL_PORT: 3306
     ports:
       - "4000:4000"
+    depends_on: 
+      - "mysql"
   mysql:
     image: budougumi0617/mysql-sakila
     container_name: mysql-dwh-e1-app
     environment: 
       MYSQL_ROOT_PASSWORD: 'root'
-      DB_NAME: 'sakila'
-    ports:
-      - "43306:3306"
+    
+
+  
