@@ -5,10 +5,10 @@ module.exports = {
 		port: 4000,
 	},
 	mysql: {
-		host: 'localhost',
+		host: process.env.DB_CONTAINER || 'localhost',
 		user: 'root',
 		password: 'root',
-		port: process.env.MYSQL_PORT || 43306,
+		port: process.env.MYSQL_PORT || 53306,
 		metadataSchema: 'information_schema',
 		mysqlSchema: 'mysql',
 		objectiveDb,
