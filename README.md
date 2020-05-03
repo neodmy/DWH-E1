@@ -2,6 +2,15 @@
 
 This app has been developed for the [ETSI Informáticos](https://fi.upm.es/) 2019/2020 **Data Warehouse** course during the **assignment E1** held by [Universidad Politécnica de Madrid](https://www.upm.es/) as a part of the Computer Science Degree.
 
+## Table of contents
+- [App description](Appdescription)
+- [Running on local environment](Localenvironment)
+- [Running on dev environment](Devenvironment)
+- [Making queries](Makingqueries)
+
+---
+
+### App description
 The app aims to keep track of metadata changes when data are altered in any way on a database selected by the user (from now on, the *working database*). If this database does not previously exist, the app will create it.
 
 In order to do the traking, the app will use a database called **register** containing a replica of the MySQL data dictionary `information_schema` tables ([check MySQL docs](https://dev.mysql.com/doc/refman/8.0/en/information-schema.html)) listed below. For each of those, it will create a pair of tables such as `<information_schema_table>_BEFORE` and `<information_schema_table>_AFTER`.
@@ -67,6 +76,12 @@ App will be listening on port `4000`
 $ npm run docker-app
 ```
 App will be listening on port `4000` and MySQL server on port `43306`
+
+Alternatively, in case you don't want to use npm scripts just run this command on the project root directory
+
+```cmd
+$ docker-compose -p dwh-e1 -f docker-compose.yml up --build --force-recreate -d
+```
 
 ---
 ### Making queries
