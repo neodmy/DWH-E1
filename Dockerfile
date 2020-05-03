@@ -15,4 +15,4 @@ EXPOSE 4000
 
 RUN npm run manifest
 
-CMD [ "npm", "start" ]
+CMD [ "./wait-for-it.sh", "mysql:3306", "--", "npm", "start" ]
