@@ -14,8 +14,8 @@
     "precommit": "npm run lint",
     "prepush": "npm run test",
     "postinstall": "node_modules/.bin/eslint . --fix",
-    "docker-db": "docker-compose -p dwh-db-e1 -f docker-compose-mysql.yml up -d --force-recreate --build",
-    "docker-app": "docker-compose -p dwh-e1 -f docker-compose.yml up -d --force-recreate --build"
+    "docker-db": "docker-compose -p dwh-db-e1 -f docker-compose-mysql.yml up --build --force-recreate -d",
+    "docker-app": "docker-compose -p dwh-e1 -f docker-compose.yml up --build --force-recreate -d"
   },
   "husky": {
     "hooks": {
