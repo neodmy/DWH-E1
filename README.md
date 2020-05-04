@@ -18,6 +18,7 @@ In order to do the traking, the app will use a database called **register** cont
 
 Before and after executing the *working query*, the app will perform a `SELECT` query to the following `information_schema` tables:
 
+- COLUMNS
 - VIEWS
 - TRIGGERS
 - TABLE_CONSTRAINTS
