@@ -54,6 +54,12 @@ module.exports = () => {
 		};
 
 		const informationSchemaTables = {
+			COLUMNS: {
+				select: () => selectTableData('COLUMNS', `WHERE TABLE_SCHEMA='${objectiveDb}'`),
+				drop: () => dropTablesQueries('COLUMNS'),
+				insert: () => insertTablesQueries('COLUMNS'),
+				create: () => createTablesQuery('COLUMNS'),
+			},
 			VIEWS: {
 				select: () => selectTableData('VIEWS', `WHERE TABLE_SCHEMA='${objectiveDb}'`),
 				drop: () => dropTablesQueries('VIEWS'),
